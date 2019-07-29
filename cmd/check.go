@@ -19,6 +19,7 @@ var (
 func init() {
 	checkCmd.Flags().Bool("delete", false, "delete files not part of this package")
 	checkCmd.Flags().String("host", "localhost", "the database host")
+	checkCmd.Flags().Int("port", 27017, "the database port")
 	checkCmd.Flags().StringP("username", "u", "mongo", "the database username")
 	checkCmd.Flags().StringP("password", "p", "mongo", "the database password")
 	rootCmd.AddCommand(checkCmd)

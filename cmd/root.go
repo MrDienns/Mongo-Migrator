@@ -6,6 +6,7 @@ import (
 
 var (
 	host     string
+	port     int
 	username string
 	password string
 	debug    bool
