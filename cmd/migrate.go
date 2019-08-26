@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -18,6 +19,7 @@ var (
 )
 
 func init() {
+	viper.AutomaticEnv()
 	migrateCmd.Flags().Bool("delete", false, "delete files not part of this package")
 	migrateCmd.Flags().BoolP("debug", "d", false, "outputs detailed activity information")
 	migrateCmd.Flags().String("host", "localhost", "the database host")
