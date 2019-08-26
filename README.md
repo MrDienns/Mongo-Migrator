@@ -2,6 +2,9 @@
 The Mongo Migrator project is a very small Go-based project that provides a small and simplistic migration tool to make MongoDB migrations easier to prepare and automate.
 
 ![Stable builds](https://travis-ci.com/Dyescape/Mongo-Migrator.svg?branch=master)
+[![Stable coverage](https://codecov.io/gh/Dyescape/Mongo-Migrator/branch/master/graph/badge.svg)](https://codecov.io/gh/Dyescape/Mongo-Migrator)
+
+
 
 # Table of contents
 - [Overview](#overview)
