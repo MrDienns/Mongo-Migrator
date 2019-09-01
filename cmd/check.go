@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -17,6 +18,7 @@ var (
 )
 
 func init() {
+	viper.AutomaticEnv()
 	checkCmd.Flags().Bool("delete", false, "delete files not part of this package")
 	checkCmd.Flags().String("host", "localhost", "the database host")
 	checkCmd.Flags().Int("port", 27017, "the database port")
