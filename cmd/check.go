@@ -25,7 +25,10 @@ var (
 			if err != nil {
 				fmt.Println(err.Error())
 			}
-			migr.Disconnect()
+			err = migr.Disconnect()
+			if err != nil {
+				fmt.Println(err.Error())
+			}
 		},
 	}
 )

@@ -61,9 +61,13 @@ func (m *Migrator) Connect() error {
 }
 
 // Disconnect will disconnect the client from the MongoDB instance.
-func (m *Migrator) Disconnect() {
+func (m *Migrator) Disconnect() error {
 	if m.client == nil {
-		return
+		return nil
 	}
-	m.client.Disconnect(m.ctx)
+	err := m.client.Disconnect(m.ctx)
+	if err != nil {
+		return err
+	}
+	return nil
 }
