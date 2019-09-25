@@ -8,7 +8,6 @@ import (
 )
 
 var (
-	delete     bool
 	migrateCmd = &cobra.Command{
 		Use:   "migrate",
 		Short: "Executes the database migration",

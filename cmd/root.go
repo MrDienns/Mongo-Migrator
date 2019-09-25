@@ -5,14 +5,7 @@ import (
 )
 
 var (
-	host     string
-	port     int
-	username string
-	password string
-	debug    bool
-	path     string
-	database string
-	rootCmd  = &cobra.Command{
+	rootCmd = &cobra.Command{
 		Use:   "mongomigrator",
 		Short: "Migrates local data into MongoDB",
 		Long: `A simple Go-based application which will migrate locally
