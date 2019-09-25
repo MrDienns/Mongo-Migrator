@@ -23,7 +23,7 @@ The Mongo Migrator has a few commands which can be used throughout your deployme
 
 # Environment variables
 The tool offers several environment variables. They are used throughout the application. All of these settings can also be used in the commands. Environment variables are upper case, while the command arguments are lowercase.
-`PATH` - Specify the path of the directory to be migrated towards Mongo. Default `./migrate`.
+`DIR` - Specify the directory path of the directory to be migrated towards Mongo. Default `./migrate`.
 `DELETE` - Delete files not part of this package. Default `false`.
 `DEBUG` - Output detailed information during any activity. Default `false`.
 `HOST` - The MongoDB host. Default `localhost`
