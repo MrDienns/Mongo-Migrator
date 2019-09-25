@@ -7,21 +7,21 @@ import (
 )
 
 func TestValidConnectionToDatabase(t *testing.T) {
-	migr := NewMigrator("localhost:27017", "", "")
+	migr := NewMigrator("localhost:27017", "", "", "")
 	err := migr.Connect()
 	assert.NoError(t, err)
 	migr.Disconnect()
 }
 
 func TestInvalidConnectionUrl(t *testing.T) {
-	migr := NewMigrator("i-am:invalid", "", "")
+	migr := NewMigrator("i-am:invalid", "", "", "")
 	err := migr.Connect()
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "error parsing uri")
 }
 
 func TestTimeoutConnectionToDatabase(t *testing.T) {
-	migr := NewMigrator("localhost:9999", "", "")
+	migr := NewMigrator("localhost:9999", "", "", "")
 	err := migr.Connect()
 	assert.Error(t, err)
 }

@@ -16,14 +16,14 @@ type Migrator struct {
 	url      string
 	username string
 	password string
-
-	ctx    context.Context
-	client *mongo.Client
+	database string
+	ctx      context.Context
+	client   *mongo.Client
 }
 
 // NewMigrator accepts a number of parameters and constructs a new Migrator object
 // and returns the pointer.
-func NewMigrator(url string, username string, password string) *Migrator {
+func NewMigrator(url string, username string, password string, database string) *Migrator {
 	if !strings.HasPrefix(url, "mongodb://") {
 		url = "mongodb://" + url
 	}
@@ -31,6 +31,7 @@ func NewMigrator(url string, username string, password string) *Migrator {
 		url:      url,
 		username: username,
 		password: password,
+		database: database,
 	}
 }
 
@@ -57,6 +58,7 @@ func (m *Migrator) Connect() error {
 	if err != nil {
 		return err
 	}
+	m.ctx = ctx
 	m.client = client
 	return nil
 }

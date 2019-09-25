@@ -11,6 +11,7 @@ var (
 	password string
 	debug    bool
 	path     string
+	database string
 	rootCmd  = &cobra.Command{
 		Use:   "mongomigrator",
 		Short: "Migrates local data into MongoDB",
