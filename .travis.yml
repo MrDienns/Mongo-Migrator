@@ -1,5 +1,8 @@
 language: go
 
+services:
+  - docker
+
 stages:
   - test
 
@@ -8,9 +11,15 @@ go:
 
 before_install:
   - go get -t -v ./...
+  - docker-compose up -d
+  - sleep 10
 
 script:
   - go test ./... -race -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - docker-compose down
+
+after_failure:
+  - docker-compose down
