@@ -57,6 +57,7 @@ func (m *Migrator) Connect() error {
 	if err != nil {
 		return err
 	}
+	m.client = client
 	return nil
 }
 
