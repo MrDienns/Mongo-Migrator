@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -73,4 +74,14 @@ func (m *Migrator) Disconnect() error {
 		return err
 	}
 	return nil
+}
+
+// Collections returns a string slice. These values represent the collection names currently
+// found in the MongoDB database.
+func (m *Migrator) Collections() ([]string, error) {
+	cursor, err := m.client.Database(m.database).ListCollectionNames(m.ctx, bson.D{{}})
+	if err != nil {
+		return nil, err
+	}
+	return cursor, nil
 }

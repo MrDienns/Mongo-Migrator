@@ -26,6 +26,16 @@ var (
 			if err != nil {
 				fmt.Println(err.Error())
 			}
+
+			fmt.Println("Reading collections from database...")
+			colls, err := migr.Collections()
+			if err != nil {
+				fmt.Println(err.Error())
+			}
+			for _, coll := range colls {
+				fmt.Println("Found collection " + coll)
+			}
+
 			err = migr.Disconnect()
 			if err != nil {
 				fmt.Println(err.Error())
