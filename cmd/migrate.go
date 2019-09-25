@@ -20,6 +20,7 @@ var (
 
 func init() {
 	viper.AutomaticEnv()
+	checkCmd.Flags().String("path", "./migrate", "the directory path to migrate")
 	migrateCmd.Flags().Bool("delete", false, "delete files not part of this package")
 	migrateCmd.Flags().BoolP("debug", "d", false, "outputs detailed activity information")
 	migrateCmd.Flags().String("host", "localhost", "the database host")
