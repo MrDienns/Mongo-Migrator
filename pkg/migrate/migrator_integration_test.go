@@ -26,6 +26,15 @@ func TestTimeoutConnectionToDatabase(t *testing.T) {
 	assert.Error(t, err)
 }
 
+func TestCollectionDiscovery(t *testing.T) {
+	migr := migrator(t)
+	exp := []string{"_integration_test_collection"}
+	act, err := migr.Collections()
+	assert.NoError(t, err)
+	assert.Equal(t, exp, act)
+	reset(migr, "_integration_test_collection")
+}
+
 func TestDocumentIdDiscovery(t *testing.T) {
 	migr := migrator(t)
 	exp := []string{"a", "b", "c", "d", "e"}
