@@ -23,13 +23,17 @@ The Mongo Migrator has a few commands which can be used throughout your deployme
 
 # Environment variables
 The tool offers several environment variables. They are used throughout the application. All of these settings can also be used in the commands. Environment variables are upper case, while the command arguments are lowercase.
-`DIR` - Specify the directory path of the directory to be migrated towards Mongo. Default `./migrate`.
-`DELETE` - Delete files not part of this package. Default `false`.
-`DEBUG` - Output detailed information during any activity. Default `false`.
-`HOST` - The MongoDB host. Default `localhost`
-`PORT` - The MongoDB port. Default `27017`
-`USERNAME` - The username for MongoDB. Default `mongo`
-`PASSWORD` - The password for MongoDB. Default `mongo`
+
+| Name     | function                       |  Default  |
+|----------|--------------------------------|-----------|
+| HOST     | Hostname to connect to         | localhost |
+| PORT     | Port to connect to             | 27017     |
+| USERNAME | Username for authentication    |           |
+| PASSWORD | Password for authentication    |           |
+| DATABASE | Database to connect on         | database  |
+| DIR      | The file directory to migrate  | ./migrate |
+| DELETE   | Whether or not to delete files | false     |
+| DEBUG    | Debug mode                     | false     |
 
 # Motivation
 We at Dyescape run a massive Minecraft MMORPG project. The majority of content in-game is all configured through JSON files, which are loaded from a MongoDB instance. With frequent updates, and a team constantly working hard to prepare new content updates and patches, we wanted some mechanism of easily being able to prepare for these updates and to them apply them to the network as easy and as automated as can be. Our systems automatically detect file changes in MongoDB, so deploying a (content) update for us merely involes migrating the JSON files. This project is created to make this process as easy and as automated as possible by preparing a Docker image from our content repositories. These repositories will constantly prepare update containers through Continuous Integration, until a scheduled Kubernetes Job decides to take the latest image and execute the migration.
