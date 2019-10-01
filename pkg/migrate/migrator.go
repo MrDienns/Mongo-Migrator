@@ -2,10 +2,12 @@ package migrate
 
 import (
 	"context"
+	"fmt"
 	"strings"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -20,6 +22,10 @@ type Migrator struct {
 	database string
 	ctx      context.Context
 	client   *mongo.Client
+}
+
+type Document struct {
+	id primitive.ObjectID `bson:"_id, omitempty"`
 }
 
 // NewMigrator accepts a number of parameters and constructs a new Migrator object
@@ -84,4 +90,32 @@ func (m *Migrator) Collections() ([]string, error) {
 		return nil, err
 	}
 	return cursor, nil
+}
+
+// DocumentIds will return all of the document IDs
+func (m *Migrator) DocumentIds(coll string) ([]string, error) {
+	cursor, err := m.client.Database(m.database).Collection(coll).Find(m.ctx, bson.D{{}})
+	if err != nil {
+		return nil, err
+	}
+
+	res := make([]string, 0)
+
+	for cursor.Next(m.ctx) {
+		var doc bson.M
+		err := cursor.Decode(&doc)
+		if err != nil {
+			return nil, err
+		}
+
+		id := fmt.Sprintf("%v", doc["_id"])
+		if _, ok := doc["_id"].(string); !ok {
+			fmt.Println("Warning: Skipping document with non string ID; " + id)
+			continue
+		}
+
+		res = append(res, id)
+	}
+
+	return res, nil
 }

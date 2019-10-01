@@ -34,6 +34,14 @@ var (
 			}
 			for _, coll := range colls {
 				fmt.Println("Found collection " + coll)
+
+				docs, err := migr.DocumentIds(coll)
+				if err != nil {
+					fmt.Println(err.Error())
+				}
+				for _, doc := range docs {
+					fmt.Println("Found document " + doc)
+				}
 			}
 
 			err = migr.Disconnect()
